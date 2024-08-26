@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookbook</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" th:href="@{/recipes}">Cookbook</a>
+</nav>
+<!-- Navbar ends -->
+<div class ="container">
+  <div class = "row">
+    <h1> Cookbook </h1>
+  </div>
+
+  <div class = "row">
+    <div class = "col-lg-3">
+      <a th:href = "@{/recipes/new}" class = "btn btn-primary btn-sm mb-3"> Add Recipe</a>
+    </div>
+  </div>
+  <table class = "table table-striped table-bordered">
+    <thead class = "table-dark">
+    <tr>
+      <th> Recipe Name</th>
+      <th> Recipe description</th>
+      <th> Recipe ingredients </th>
+      <th> Recipe directions </th>
+      <th> Created </th>
+      <th> Actions </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each = "recipe: ${recipes}">
+      <td th:text = "${recipe.name}"></td>
+      <td th:text = "${recipe.description}"></td>
+      <td th:text = "${recipe.ingredients}"></td>
+      <td th:text = "${recipe.directions}"></td>
+      <td th:text = "${recipe.recipeCreated.toString().substring(0,10)}"></td>
+      <td>
+        <a th:href = "@{/recipes/edit/{id}(id=${recipe.id})}"
+           class = "btn btn-primary">Update</a>
+
+        <a th:href = "@{/recipes/{id}(id=${recipe.id})}"
+           class = "btn btn-danger">Delete</a>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
